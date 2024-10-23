@@ -137,15 +137,16 @@ export default function Chat(props: { apiKeyApp: string }) {
       >
         <Flex mb="20px">
           <Select
-            placeholder="Select"
+            placeholder="Select Catalog"
             onChange={handleChange}
             value={collection}
             color={inputColor}
             borderColor={borderColor}
             borderRadius="45px"
           >
-            <option value="Catalog 1">Catalog 1</option>
-            <option value="Catalog 2">Catalog 2</option>
+            <option value="Catalog 1">APEX</option>
+            <option value="Catalog 2">EB</option>
+            <option value="Catalog 2">DOI</option>
           </Select>
         </Flex>
 
