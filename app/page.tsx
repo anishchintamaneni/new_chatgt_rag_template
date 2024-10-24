@@ -136,7 +136,11 @@ export default function Chat(props: { apiKeyApp: string }) {
         minH={{ base: '75vh', '2xl': '85vh' }}
         maxW="1000px"
       >
-        <Flex mb="20px">
+        <Flex
+         mb="20px"
+         //position="fixed" // Make the select fixed
+         w="100%" // Ensure it takes full width
+         >
           <Select
             onChange={handleChange}
             value={collection}
@@ -178,6 +182,11 @@ export default function Chat(props: { apiKeyApp: string }) {
                       borderColor={borderColor}
                       borderRadius="14px"
                       w="100%"
+                      // w="auto" // Set to auto to allow dynamic width
+                      // maxW="80%" // Set a reasonable max-width
+                      // whiteSpace="pre-wrap" // Preserve line breaks in text
+                      // wordBreak="break-word" // Ensure long words wrap correctly
+
                     >
                       <Text
                         color={textColor}
@@ -214,65 +223,66 @@ export default function Chat(props: { apiKeyApp: string }) {
         {/* Scroll to this div on new message */}
         <div ref={messagesEndRef} />
 
-        {/* Input box fixed at the bottom center */}
-        <Flex position="fixed" bottom="20px" w="100%" maxW="1000px" px="20px" justify="center">
-          <Input
-            id="question1"
-            minH="54px"
-            h="100%"
-            border="1px solid"
-            borderColor={borderColor}
-            borderRadius="45px"
-            p="15px 20px"
-            me="10px"
-            fontSize="sm"
-            fontWeight="500"
-            _focus={{ borderColor: 'none' }}
-            color={inputColor}
-            _placeholder={{ color: placeholderColor }}
-            placeholder="Type your message here..."
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            flex="1"
-          />
+       {/* Input box fixed at the bottom center */}
+<Flex bottom="20px" w="100%" maxW="1000px" px="20px" justify="center">
+  <Input
+    id="question1"
+    minH="54px"
+    h="100%"
+    border="1px solid"
+    borderColor={borderColor}
+    borderRadius="45px"
+    p="15px 20px"
+    me="10px"
+    fontSize="sm"
+    fontWeight="500"
+    _focus={{ borderColor: 'none' }}
+    color={inputColor}
+    _placeholder={{ color: placeholderColor }}
+    placeholder="Type your message here..."
+    value={question}
+    onChange={(e) => setQuestion(e.target.value)}
+    flex="4" // Increased flex value to give more space to the input box
+  />
 
-          <Button
-            variant="primary"
-            py="20px"
-            px="16px"
-            fontSize="sm"
-            borderRadius="45px"
-            ms="auto"
-            w={{ base: '160px', md: '210px' }}
-            h="54px"
-            _hover={{
-              boxShadow: '0px 21px 27px -10px rgba(96, 60, 255, 0.48) !important',
-              bg: 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%) !important',
-            }}
-            onClick={handleSearch}
-            isLoading={loading}
-            mr="5px"
-          >
-            Submit
-          </Button>
+  <Button
+    variant="primary"
+    py="15px" // Reduced padding to make the button smaller
+    px="10px" // Reduced padding for width
+    fontSize="sm"
+    borderRadius="45px"
+    ms="auto"
+    w={{ base: '100px', md: '120px' }} // Reduced width
+    h="54px"
+    _hover={{
+      boxShadow: '0px 21px 27px -10px rgba(96, 60, 255, 0.48) !important',
+      bg: 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%) !important',
+    }}
+    onClick={handleSearch}
+    isLoading={loading}
+    mr="5px"
+  >
+    Submit
+  </Button>
 
-          <Button
-            variant="primary"
-            py="20px"
-            px="16px"
-            fontSize="sm"
-            borderRadius="45px"
-            w={{ base: '160px', md: '210px' }}
-            h="54px"
-            _hover={{
-              boxShadow: '0px 21px 27px -10px rgba(96, 60, 255, 0.48) !important',
-              bg: 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%) !important',
-            }}
-            onClick={isListening ? stopListening : startListening} // Toggle between start and stop
-          >
-            {isListening ? 'Stop Listening' : 'Voice Input'}
-          </Button>
-        </Flex>
+  <Button
+    variant="primary"
+    py="15px" // Reduced padding to make the button smaller
+    px="10px" // Reduced padding for width
+    fontSize="sm"
+    borderRadius="45px"
+    w={{ base: '100px', md: '120px' }} // Reduced width
+    h="54px"
+    _hover={{
+      boxShadow: '0px 21px 27px -10px rgba(96, 60, 255, 0.48) !important',
+      bg: 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%) !important',
+    }}
+    onClick={isListening ? stopListening : startListening} // Toggle between start and stop
+  >
+    {isListening ? 'Stop Listening' : 'Voice Input'}
+  </Button>
+</Flex>
+
       </Flex>
     </Flex>
   );
